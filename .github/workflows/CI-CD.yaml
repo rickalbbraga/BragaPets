@@ -51,6 +51,8 @@ jobs:
           cat kustomization.yaml
       - name: Commit Yaml File
         run: |
+          git config --local user.email "rickalbbraga@live.com"
+          git config --local user.name "Deploy Action"
           git commit -am "change image tag"
       - name: Push File
         uses: ad-m/github-push-action@master  
