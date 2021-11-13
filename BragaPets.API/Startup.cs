@@ -70,8 +70,8 @@ namespace BragaPets.API
                 });
             }
             
-            loggerFactory.AddSerilog(LogConfiguration(), true);
-            app.UseElasticApm(Configuration);
+            //loggerFactory.AddSerilog(LogConfiguration(), true);
+            //app.UseElasticApm(Configuration);
             app.UseRouting();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
