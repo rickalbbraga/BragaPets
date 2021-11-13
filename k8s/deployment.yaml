@@ -23,9 +23,11 @@ spec:
       containers:
         - name: bragapets-app
           image: rickalbbraga/bragapets:latest
-          # env:
-          #   - name: SqlServer
-          #     value: Server=mssql-svc-cip,1433;Database=rabraga;User Id=sa;Password=sqlserverk8sHml
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS 
+              value: http://+:80
           # livenessProbe:
           #   httpGet:
           #     path: /health
