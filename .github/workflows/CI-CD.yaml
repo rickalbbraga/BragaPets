@@ -29,7 +29,6 @@ jobs:
     - name: Build Image and Push to Dockerhub
       uses: docker/build-push-action@v1.1.0
       with:
-        dockerfile: Dockerfile
         username: ${{env.USERNAME}}
         password: ${{secrets.CONTAINERREGISTRYTOKEN}} 
         repository: ${{env.REPOSITORY}}
