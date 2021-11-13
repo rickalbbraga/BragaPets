@@ -1,12 +1,10 @@
-#kubectl label nodes <nome-do-seu-node> <nome-label-desejado=valor-label> 
-#kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=<user-docker> --docker-password=<senha-docker> --docker-email=<emaail-docker>
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: usersapp-dp
+  name: bragapets-app
   namespace: bragapets
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: bragapets-app
@@ -18,8 +16,8 @@ spec:
       labels:
         app: bragapets-app
     spec:
-      # imagePullSecrets:
-      # - name: regcred
+      imagePullSecrets:
+        - name: regcred
       # nodeSelector:
       #   nome-label-definido: valor-label-definido
       containers:
