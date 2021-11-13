@@ -1,0 +1,36 @@
+name: CI-CD
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+env:
+  USERNAME: rickalbbraga
+  REPOSITORY: rickalbbraga/bragapets
+
+jobs:
+  build:
+    name: build-image-app
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build
+    - name: Test
+      run: dotnet test
+    - name: Build Image and Push to Dockerhub
+      uses: docker/build-push-action@v1.1.0
+      with:
+        dockerfile: Dockerfile
+        username: ${{env.USERNAME}}
+        password: ${{secrets.CONTAINERREGISTRYTOKEN}} 
+        repository: ${{env.REPOSITORY}}
+        tags: ${{github.sha}}, latest
