@@ -1,10 +1,11 @@
+#kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=<username-docker> --docker-password=<senha-docker> --docker-email=<email-docker>
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bragapets-app
   namespace: bragapets
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: bragapets-app
@@ -28,6 +29,8 @@ spec:
               value: Development
             - name: ASPNETCORE_URLS 
               value: http://+:80
+            - name: SqlServer
+              value: "SqlServer-Com-Fernando"
           # livenessProbe:
           #   httpGet:
           #     path: /health

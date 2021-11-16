@@ -29,5 +29,18 @@ namespace BragaPets.API.Controllers.V1
                 return StatusCode((int) HttpStatusCode.InternalServerError, "Internal Server Error");
             }
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Post()
+        {
+            try
+            {
+                return Created("teste-com-fernando", new { Nome = "Fernando" });
+            }
+            catch (Exception e)
+            {
+                return StatusCode((int) HttpStatusCode.InternalServerError, "Internal Server Error");
+            }
+        }
     }
 }
