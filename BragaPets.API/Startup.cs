@@ -70,7 +70,7 @@ namespace BragaPets.API
                 });
             }
             
-            //loggerFactory.AddSerilog(LogConfiguration(), true);
+            loggerFactory.AddSerilog(LogConfiguration(), true);
             //app.UseElasticApm(Configuration);
             app.UseRouting();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
@@ -87,7 +87,7 @@ namespace BragaPets.API
                 .Build();
             return configuration;
         }
-        
+            
         private Serilog.ILogger LogConfiguration()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -96,15 +96,15 @@ namespace BragaPets.API
             Log.Logger = new LoggerConfiguration()
                 .Enrich.WithProperty("ApplicationName", "BragaPets")
                 .Enrich.WithProperty("Environment", environment)
-                .MinimumLevel.Warning()
-                .Enrich.WithElasticApmCorrelationInfo()
+                .MinimumLevel.Information()
+                .WriteTo.Http("http://localhost:5044")
+                //.Enrich.WithElasticApmCorrelationInfo()
                 .WriteTo.Console()
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://elastic:BragaP3t2@localhost:9200"))
-                {
-                    AutoRegisterTemplate = true,
-                    AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
-                    IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name?.ToLower()}-{0:yyyy-MM}"
-                })
+                // .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://elastic:BragaP3t2@localhost:9200"))
+                // {
+                //     AutoRegisterTemplate = true,
+                //     AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+                // })
                 .CreateLogger();
 
                 return Log.Logger;

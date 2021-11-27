@@ -45,8 +45,10 @@ namespace BragaPets.API.Controllers.V1
             }
             catch (Exception e)
             {
-                Agent.Tracer.CaptureException(e);
-                _logger.LogError(e, string.Empty);
+                var erro = new {Erro = e, Message = "Erro não tratado"};
+                
+                //Agent.Tracer.CaptureException(e);
+                _logger.LogError(Newtonsoft.Json.JsonConvert.SerializeObject(erro));
                 return StatusCode((int) HttpStatusCode.InternalServerError, ErrorMessage);
             }
         }
