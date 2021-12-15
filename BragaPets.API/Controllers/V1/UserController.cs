@@ -45,10 +45,9 @@ namespace BragaPets.API.Controllers.V1
             }
             catch (Exception e)
             {
-                var erro = new {Erro = e, Message = "Erro não tratado"};
-                
+                var erro = new {Applicattion = "BragaPets", Environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"), Message = "Erro não tratado"};
                 //Agent.Tracer.CaptureException(e);
-                _logger.LogError(Newtonsoft.Json.JsonConvert.SerializeObject(erro));
+                _logger.LogError(e, Newtonsoft.Json.JsonConvert.SerializeObject(erro));
                 return StatusCode((int) HttpStatusCode.InternalServerError, ErrorMessage);
             }
         }
@@ -79,7 +78,6 @@ namespace BragaPets.API.Controllers.V1
             }
             catch (Exception e)
             {
-                Agent.Tracer.CaptureException(e);
                 _logger.LogError(e, string.Empty);
                 return StatusCode((int) HttpStatusCode.InternalServerError, ErrorMessage);
             }

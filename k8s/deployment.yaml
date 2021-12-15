@@ -2,27 +2,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bragapets-app
+  name: app
   namespace: bragapets
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: bragapets-app
+      app: app
   strategy:
     type: RollingUpdate
   template:
     metadata:
-      name: bragapets-app
+      name: app
       labels:
-        app: bragapets-app
+        app: app
     spec:
       imagePullSecrets:
         - name: regcred
-      # nodeSelector:
-      #   nome-label-definido: valor-label-definido
       containers:
-        - name: bragapets-app
+        - name: app
           image: rickalbbraga/bragapets:latest
           env:
             - name: ASPNETCORE_ENVIRONMENT
@@ -57,9 +55,9 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 80
-          # envFrom:
-          #   - configMapRef:
-          #       name: usersapp-cm
-          #   - secretRef:
-          #       name: usersapp-sc
+          envFrom:
+            - configMapRef:
+                name: app-cm
+            - secretRef:
+                name: app-sc
   

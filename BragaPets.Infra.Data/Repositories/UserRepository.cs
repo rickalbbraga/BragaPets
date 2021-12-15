@@ -59,7 +59,7 @@ namespace BragaPets.Infra.Data.Repositories
                     ,CreateDate
                 FROM USERS
                 WHERE
-                    STATUS = 1";
+                    STATUS = 'ACTIVE'";
 
             return await base.GetAll(query);
         }

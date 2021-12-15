@@ -70,7 +70,7 @@ namespace BragaPets.API
                 });
             }
             
-            loggerFactory.AddSerilog(LogConfiguration(), true);
+            //loggerFactory.AddSerilog(LogConfiguration(), true);
             //app.UseElasticApm(Configuration);
             app.UseRouting();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
@@ -94,8 +94,8 @@ namespace BragaPets.API
             var elkConfiguration = Configuration.GetSection("ElkConfiguration")?.Get<ElkConfiguration>();
 
             Log.Logger = new LoggerConfiguration()
-                .Enrich.WithProperty("ApplicationName", "BragaPets")
-                .Enrich.WithProperty("Environment", environment)
+                // .Enrich.WithProperty("ApplicationName", "BragaPets")
+                // .Enrich.WithProperty("Environment", environment)
                 .MinimumLevel.Information()
                 .WriteTo.Http("http://localhost:5044")
                 //.Enrich.WithElasticApmCorrelationInfo()
