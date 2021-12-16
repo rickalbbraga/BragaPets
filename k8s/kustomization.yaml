@@ -9,4 +9,4 @@ namespace: bragapets
 images:
 - name: app-image
   newName: rickalbbraga/bragapets
-  newTag: cd74493ac10ceeb4c1a64fff7fb42b62996eacf0
+  newTag: 3ff67316921856313ee209ac76b6ea1308a59bf6
