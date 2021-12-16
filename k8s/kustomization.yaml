@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+- configmap.yaml
+- secret.yaml
 namespace: bragapets
 images:
 - name: app-image

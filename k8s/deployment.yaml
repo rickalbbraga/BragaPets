@@ -22,13 +22,6 @@ spec:
       containers:
         - name: app
           image: rickalbbraga/bragapets:latest
-          env:
-            - name: ASPNETCORE_ENVIRONMENT
-              value: Development
-            - name: ASPNETCORE_URLS 
-              value: http://+:80
-            - name: SqlServer
-              value: "SqlServer-Com-Fernando"
           # livenessProbe:
           #   httpGet:
           #     path: /health
