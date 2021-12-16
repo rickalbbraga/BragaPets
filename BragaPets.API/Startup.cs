@@ -58,17 +58,18 @@ namespace BragaPets.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(options =>
-                {
-                    foreach (var description in provider.ApiVersionDescriptions)
-                    {
-                        options.SwaggerEndpoint(
-                            $"../swagger/{description.GroupName}/swagger.json", 
-                            description.GroupName.ToUpperInvariant());
-                    }
-                });
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint(
+                        $"../swagger/{description.GroupName}/swagger.json", 
+                        description.GroupName.ToUpperInvariant());
+                }
+            });
             
             //loggerFactory.AddSerilog(LogConfiguration(), true);
             //app.UseElasticApm(Configuration);
